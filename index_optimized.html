@@ -50,17 +50,7 @@
     <script>
         var loadingText = document.querySelector("#loading-text");
         let loadedBytes = 0;
-        // The getSize function is no longer needed as totalBytes calculation is removed.
-        // async function getSize(url) {
-        //     try {
-        //         const res = await fetch(url, {
-        //             method: "HEAD"
-        //         });
-        //         return parseInt(res.headers.get("Content-Length") || "0", 10);
-        //     } catch {
-        //         return 0;
-        //     }
-        // }
+
         async function fetchWithProgress(url) {
             const response = await fetch(url);
             const reader = response.body.getReader();
@@ -102,9 +92,7 @@
             return parts;
         }
         (async () => {
-            // Removed totalBytes calculation as it's no longer used for display.
-            // const allParts = [...getParts("Build/hk.data", 1, 42), ...getParts("Build/hk.wasm", 1, 2), ];
-            // totalBytes = (await Promise.all(allParts.map(getSize))).reduce((a, b) => a + b, 0);
+
 
             const [dataUrl, wasmurl] = await Promise.all([
                 mergeFiles(getParts("Build/hk.data", 1, 42)),
@@ -122,7 +110,7 @@
                 productVersion: "1.0",
             };
 
-            // Optimization: Force devicePixelRatio to 1 for all systems to reduce rendering workload.
+            // Force devicePixelRatio to 1 for all systems to reduce rendering workload. OPTIMIZATION
             config.devicePixelRatio = 1;
 
             var container = document.querySelector("#unity-container");
@@ -166,7 +154,7 @@
                     alert(message);
                 });
             };
-            document.body.appendChild(script);
+            document.body.appendChild(script); // Append the children!
         })();
     </script>
 </body>
